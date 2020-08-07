@@ -4,8 +4,8 @@ import MyPosts from "./MyPosts/MyPosts";
 
 const Profile = () => {
     return (
-        <div className={styles.content}>
-            <div>
+        <div>
+            <div className={styles.background}>
                 <img
                     alt="bla"
                     src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.w3schools.com%2Fhowto%2Fimg_snow_wide.jpg&f=1&nofb=1"

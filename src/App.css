@@ -11,4 +11,9 @@
     column-gap: 10px;
 }
 
+.app-wrapper-content {
+    grid-area: c;
+    background-color: #f7f7f7;
+}
+
 
