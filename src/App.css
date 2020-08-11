@@ -7,13 +7,13 @@
   "n c";
     grid-template-rows: 60px 1fr;
     grid-template-columns: 1fr 10fr;
-    row-gap: 10px;
     column-gap: 10px;
+    row-gap: 10px;
 }
 
 .app-wrapper-content {
     grid-area: c;
-    background-color: #f7f7f7;
+    background-color: #dfe3ee;
 }
 
 
