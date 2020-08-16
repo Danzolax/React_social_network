@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_NEW_MY_MESSAGE_TEXT = 'UPDATE-NEW-MY-MESSAGE-TEXT'
+const ADD_MY_MESSAGE = 'ADD-NEW-MY-MESSAGE'
+
 let store = {
     _state: {
         dialogsPage: {
@@ -25,6 +30,7 @@ let store = {
                 {id: 3, message: "fgwqr"},
 
             ],
+            newMyMessageText: "",
         },
         profilePage: {
             posts: [
@@ -32,7 +38,7 @@ let store = {
                 {id: 2, message: "My second post", likes: 3},
                 {id: 3, message: "My third post", likes: 8},
             ],
-            newPostText: "Zolax",
+            newPostText: "",
         },
         sidebar: {
             friendsBar: [
@@ -45,28 +51,49 @@ let store = {
     _callSubscriber() {
         console.log("state was changed")
     },
-    getState(){
-        return this._state
-    },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likes: 0,
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
+
     subscribe(observer) {
         this._callSubscriber = observer
     },
+    getState(){
+        return this._state
+    },
+
+    dispatch(action){
+        if (action.type === ADD_POST){
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likes: 0,
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        }
+        else if (action.type === UPDATE_NEW_POST_TEXT){
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state)
+        }
+        else if (action.type === UPDATE_NEW_MY_MESSAGE_TEXT){
+            this._state.dialogsPage.newMyMessageText = action.newText
+            this._callSubscriber(this._state)
+        }
+        else if (action.type === ADD_MY_MESSAGE){
+            let newMyMessage = {
+                id: '4',
+                message : this._state.dialogsPage.newMyMessageText
+            }
+            this._state.dialogsPage.myMessages.push(newMyMessage)
+            this._state.dialogsPage.newMyMessageText = ''
+            this._callSubscriber(this._state)
+        }
+    },
 }
 
+export const addPostActionCreator = () => ({ type: ADD_POST})
+export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
+export const addMyMessageActionCreator = () => ({ type: ADD_MY_MESSAGE})
+export const updateNewMyMessageTextActionCreator = (text) => ({type: UPDATE_NEW_MY_MESSAGE_TEXT, newText: text})
 
 
 export default store
