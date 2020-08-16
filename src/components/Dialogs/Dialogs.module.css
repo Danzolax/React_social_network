@@ -18,25 +18,15 @@
 }
 
 .messages{
-    margin-top: 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "message myMessage" "nothing input";
+
 }
 
 .message{
     border-radius: 30px;
-    grid-area: message;
     text-align: left;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
-.myMessage{
-    margin-top: 30px;
-    grid-area: myMessage;
-    text-align: right;
-    margin-bottom: 30px;
-}
 
 .dialog img{
     width: 40px;
@@ -45,6 +35,6 @@
 }
 
 .messageInput{
-    grid-area: input;
+
 }
 

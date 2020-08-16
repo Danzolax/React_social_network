@@ -1,7 +1,7 @@
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const UPDATE_NEW_MY_MESSAGE_TEXT = 'UPDATE-NEW-MY-MESSAGE-TEXT'
-const ADD_MY_MESSAGE = 'ADD-NEW-MY-MESSAGE'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+const SEND_MESSAGE = 'SEND-MESSAGE'
 
 let store = {
     _state: {
@@ -24,13 +24,7 @@ let store = {
                 {id: 2, message: "hi"},
                 {id: 3, message: "dude"},
             ],
-            myMessages: [
-                {id: 1, message: "sada"},
-                {id: 2, message: "fghs"},
-                {id: 3, message: "fgwqr"},
-
-            ],
-            newMyMessageText: "",
+            newMessageBody: "",
         },
         profilePage: {
             posts: [
@@ -71,29 +65,29 @@ let store = {
             this._callSubscriber(this._state)
         }
         else if (action.type === UPDATE_NEW_POST_TEXT){
-            this._state.profilePage.newPostText = action.newText
+            this._state.profilePage.newPostText = action.body
             this._callSubscriber(this._state)
         }
-        else if (action.type === UPDATE_NEW_MY_MESSAGE_TEXT){
-            this._state.dialogsPage.newMyMessageText = action.newText
+        else if (action.type === UPDATE_NEW_MESSAGE_BODY){
+            this._state.dialogsPage.newMessageBody = action.body
             this._callSubscriber(this._state)
         }
-        else if (action.type === ADD_MY_MESSAGE){
-            let newMyMessage = {
-                id: '4',
-                message : this._state.dialogsPage.newMyMessageText
+        else if (action.type === SEND_MESSAGE){
+            let body = {
+                id: 4,
+                message : this._state.dialogsPage.newMessageBody
             }
-            this._state.dialogsPage.myMessages.push(newMyMessage)
-            this._state.dialogsPage.newMyMessageText = ''
+            this._state.dialogsPage.messages.push(body)
+            this._state.dialogsPage.newMessageBody = ''
             this._callSubscriber(this._state)
         }
     },
 }
 
 export const addPostActionCreator = () => ({ type: ADD_POST})
-export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
-export const addMyMessageActionCreator = () => ({ type: ADD_MY_MESSAGE})
-export const updateNewMyMessageTextActionCreator = (text) => ({type: UPDATE_NEW_MY_MESSAGE_TEXT, newText: text})
+export const updateNewPostTextCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, body: text})
+export const sendMessageCreator = () => ({ type: SEND_MESSAGE})
+export const updateNewMessageBodyCreator = (text) => ({type: UPDATE_NEW_MESSAGE_BODY, body: text})
 
 
 export default store
