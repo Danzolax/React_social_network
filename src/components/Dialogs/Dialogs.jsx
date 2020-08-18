@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogsReducer";
 
 
 const Dialogs = (props) => {
@@ -14,12 +13,12 @@ const Dialogs = (props) => {
         <Message message={m.message}/>);
 
     let onSendMessageClick = () => {
-        props.dispatch(sendMessageCreator());
+        props.sendMessage()
     }
 
     let onMessageChange = (event) => {
         let text = event.target.value;
-        props.dispatch(updateNewMessageBodyCreator(text))
+        props.updateNewMessageBody(text)
     }
 
     return (
@@ -33,7 +32,7 @@ const Dialogs = (props) => {
                     <div>
                         <textarea placeholder="Enter your message" onChange={onMessageChange} rows="1" cols="50"
                                   value={props.dialogsPage.newMessageBody}
-                                  />
+                        />
                     </div>
                     <div>
                         <button onClick={onSendMessageClick}>Send</button>
